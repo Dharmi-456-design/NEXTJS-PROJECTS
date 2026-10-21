@@ -1,17 +1,14 @@
-import Header from "@/components/Header";
-
 export default function HomePage() {
   return (
-    <main className="min-h-screen">
-      <Header />
-      <div className="mx-auto max-w-6xl px-6 py-10">
+    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+      <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight text-slate-900">
-          Student Directory
+          Students
         </h1>
-        <p className="mt-2 text-slate-600">
-          Browse students and view their academic profiles.
+        <p className="mt-1 text-sm text-slate-600">
+          Browse students and view their profiles.
         </p>
       </div>
-    </main>
+    </div>
   );
 }
