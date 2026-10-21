@@ -7,29 +7,15 @@ interface RecipeCardProps {
 
 export default function RecipeCard({ recipe }: RecipeCardProps) {
   return (
-    <article className="group bg-white rounded-lg border border-slate-200 overflow-hidden shadow-xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col">
-      <div className="relative aspect-4/3 w-full bg-linear-to-br from-slate-100 to-slate-200 overflow-hidden flex items-center justify-center border-b border-slate-100">
-        <div
-          className="w-full h-full flex flex-col items-center justify-center p-6 text-center transition-transform group-hover:scale-105 duration-300"
-          style={{
-            background: `linear-gradient(135deg, ${recipe.colorScheme.bgBadge} 0%, #f1f5f9 100%)`,
-          }}
-        >
-          <div
-            className="w-14 h-14 rounded-full flex items-center justify-center font-bold text-lg mb-2 shadow-xs"
-            style={{
-              backgroundColor: recipe.colorScheme.accent,
-              color: "#ffffff",
-            }}
-          >
-            {recipe.code.replace("REC-", "#")}
-          </div>
-          <span className="text-xs font-mono font-medium text-slate-500 uppercase tracking-wider">
-            {recipe.cuisine} • {recipe.servings}
-          </span>
-        </div>
+    <article className="group bg-white rounded-lg border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col">
+      <div className="relative aspect-4/3 w-full bg-slate-100 overflow-hidden border-b border-slate-100">
+        <img
+          src={recipe.image}
+          alt={recipe.title}
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        />
 
-        <span className="absolute top-3 left-3 px-2 py-0.5 rounded text-xs font-medium bg-white/95 text-slate-700 shadow-xs border border-slate-200/60 backdrop-blur-xs">
+        <span className="absolute top-3 left-3 px-2 py-0.5 rounded text-xs font-medium bg-white/95 text-slate-700 shadow-2xs border border-slate-200/60 backdrop-blur-xs">
           {recipe.cuisine}
         </span>
 

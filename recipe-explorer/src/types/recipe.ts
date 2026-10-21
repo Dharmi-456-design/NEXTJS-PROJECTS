@@ -21,6 +21,7 @@ export interface Recipe {
   entryNumber: string;
   ingredients: string[];
   instructions: InstructionStep[];
+  image: string;
   featured?: boolean;
   colorScheme: {
     accent: string;
