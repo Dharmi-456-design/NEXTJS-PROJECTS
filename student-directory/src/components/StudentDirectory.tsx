@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Student } from "@/types/student";
 import SearchInput from "./SearchInput";
+import DepartmentFilter from "./DepartmentFilter";
 import StudentGrid from "./StudentGrid";
 import EmptyState from "./EmptyState";
 
@@ -12,23 +13,43 @@ interface StudentDirectoryProps {
 
 export default function StudentDirectory({ initialStudents }: StudentDirectoryProps) {
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedDepartment, setSelectedDepartment] = useState("All");
+
+  const departments = Array.from(
+    new Set(initialStudents.map((s) => s.department))
+  );
 
   const filteredStudents = initialStudents.filter((student) => {
-    return student.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = student.name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesDept =
+      selectedDepartment === "All" || student.department === selectedDepartment;
+    return matchesSearch && matchesDept;
   });
+
+  const handleReset = () => {
+    setSearchQuery("");
+    setSelectedDepartment("All");
+  };
 
   return (
     <div>
       <div className="mb-6 rounded-xl border border-slate-200/90 bg-white p-4 shadow-xs">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <SearchInput value={searchQuery} onChange={setSearchQuery} />
+          <DepartmentFilter
+            selectedDepartment={selectedDepartment}
+            departments={departments}
+            onChange={setSelectedDepartment}
+          />
         </div>
       </div>
 
       {filteredStudents.length > 0 ? (
         <StudentGrid students={filteredStudents} />
       ) : (
-        <EmptyState onReset={() => setSearchQuery("")} />
+        <EmptyState onReset={handleReset} />
       )}
 
       <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-slate-200/80 pt-4 sm:flex-row">
