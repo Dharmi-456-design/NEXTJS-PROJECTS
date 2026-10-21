@@ -9,7 +9,6 @@ export default function Header() {
   const navLinks = [
     { name: "Students", href: "/" },
     { name: "Departments", href: "/departments" },
-    { name: "About", href: "/about" },
   ];
 
   return (
@@ -17,7 +16,7 @@ export default function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 sm:px-6">
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-2.5 group">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white font-bold shadow-sm shadow-blue-500/20 group-hover:bg-blue-700 transition">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white font-bold shadow-xs group-hover:bg-blue-700 transition">
               <svg
                 className="h-5 w-5"
                 fill="none"
@@ -42,7 +41,7 @@ export default function Header() {
             </span>
           </Link>
 
-          <nav className="hidden sm:flex items-center gap-1">
+          <nav className="flex items-center gap-1">
             {navLinks.map((link) => {
               const isActive =
                 link.href === "/"
@@ -67,12 +66,12 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="hidden md:inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-600">
+          <span className="hidden sm:inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-600">
             Frontend Practice
           </span>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700 ring-1 ring-inset ring-emerald-600/20">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            Live Directory
+            Live
           </span>
         </div>
       </div>
