@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { recipes } from "@/data/recipes";
-import RecipeGrid from "@/components/RecipeGrid";
+import RecipeCatalog from "@/components/RecipeCatalog";
 
 export default function RecipesPage() {
   return (
@@ -31,7 +31,7 @@ export default function RecipesPage() {
         </div>
       </div>
 
-      <RecipeGrid recipes={recipes} />
+      <RecipeCatalog initialRecipes={recipes} />
 
       <div className="mt-12 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
         <p>Page 1 of 1 — {recipes.length} formulas total</p>
