@@ -14,5 +14,6 @@ export interface Student {
   enrollmentTerm: string;
   status: string;
   bio: string;
+  specialization: string;
   subjects: Subject[];
 }
