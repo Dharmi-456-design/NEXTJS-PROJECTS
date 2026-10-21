@@ -1,5 +1,5 @@
 import { students } from "@/data/students";
-import StudentGrid from "@/components/StudentGrid";
+import StudentDirectory from "@/components/StudentDirectory";
 
 export default function HomePage() {
   return (
@@ -13,31 +13,7 @@ export default function HomePage() {
         </p>
       </div>
 
-      <StudentGrid students={students} />
-
-      <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-slate-200/80 pt-4 sm:flex-row">
-        <span className="text-xs text-slate-500">
-          Showing <span className="font-semibold text-slate-700">{students.length}</span> of{" "}
-          <span className="font-semibold text-slate-700">{students.length}</span> students
-        </span>
-
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            disabled
-            className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-400 opacity-60 cursor-not-allowed"
-          >
-            Previous
-          </button>
-          <button
-            type="button"
-            disabled
-            className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-400 opacity-60 cursor-not-allowed"
-          >
-            Next
-          </button>
-        </div>
-      </div>
+      <StudentDirectory initialStudents={students} />
     </div>
   );
 }
