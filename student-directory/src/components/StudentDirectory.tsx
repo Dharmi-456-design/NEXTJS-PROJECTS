@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { Student } from "@/types/student";
 import SearchInput from "./SearchInput";
 import DepartmentFilter from "./DepartmentFilter";
@@ -11,9 +12,12 @@ interface StudentDirectoryProps {
   initialStudents: Student[];
 }
 
-export default function StudentDirectory({ initialStudents }: StudentDirectoryProps) {
+function DirectoryContent({ initialStudents }: StudentDirectoryProps) {
+  const searchParams = useSearchParams();
+  const initialDept = searchParams.get("department") || "All";
+
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedDepartment, setSelectedDepartment] = useState("All");
+  const [selectedDepartment, setSelectedDepartment] = useState(initialDept);
 
   const departments = Array.from(
     new Set(initialStudents.map((s) => s.department))
@@ -35,7 +39,7 @@ export default function StudentDirectory({ initialStudents }: StudentDirectoryPr
 
   return (
     <div>
-      <div className="mb-6 rounded-xl border border-slate-200/90 bg-white p-4 shadow-xs">
+      <div className="mb-6 rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <SearchInput value={searchQuery} onChange={setSearchQuery} />
           <DepartmentFilter
@@ -62,19 +66,27 @@ export default function StudentDirectory({ initialStudents }: StudentDirectoryPr
           <button
             type="button"
             disabled
-            className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-400 opacity-60 cursor-not-allowed"
+            className="rounded border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-400 opacity-60 cursor-not-allowed"
           >
             Previous
           </button>
           <button
             type="button"
             disabled
-            className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-400 opacity-60 cursor-not-allowed"
+            className="rounded border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-400 opacity-60 cursor-not-allowed"
           >
             Next
           </button>
         </div>
       </div>
     </div>
+  );
+}
+
+export default function StudentDirectory({ initialStudents }: StudentDirectoryProps) {
+  return (
+    <Suspense fallback={<div className="h-40 animate-pulse rounded-xl bg-slate-100" />}>
+      <DirectoryContent initialStudents={initialStudents} />
+    </Suspense>
   );
 }
